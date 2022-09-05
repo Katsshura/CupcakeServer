@@ -8,8 +8,10 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import javax.validation.Valid;
 import javax.validation.constraints.*;
 import java.time.LocalDate;
+import java.util.List;
 
 @Data
 @Builder
@@ -22,6 +24,10 @@ public class UserDTO {
     @Email
     @JsonProperty("email")
     private String email;
+
+    @NotBlank
+    @JsonProperty("name")
+    private String name;
 
     @NotBlank
     @Size(min = 11, max = 11)
@@ -39,6 +45,7 @@ public class UserDTO {
     private String password;
 
     @NotNull
-    @JsonProperty("address")
-    private AddressDTO address;
+    @Valid
+    @JsonProperty("addresses")
+    private List<AddressDTO> addresses;
 }
