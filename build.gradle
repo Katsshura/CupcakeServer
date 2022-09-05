@@ -53,6 +53,9 @@ allprojects {
         implementation ("com.github.javafaker:javafaker:${fakerVersion}") { exclude module: 'org.yaml' }
         implementation 'org.yaml:snakeyaml:1.26'
 
+        implementation "org.mapstruct:mapstruct:${mapStructVersion}"
+        annotationProcessor "org.mapstruct:mapstruct-processor:${mapStructVersion}"
+
         testImplementation "org.junit.jupiter:junit-jupiter:${junitVersion}"
         testImplementation "org.junit.jupiter:junit-jupiter-api:${junitVersion}"
         testImplementation "org.junit.jupiter:junit-jupiter-params:${junitVersion}"
