@@ -1,6 +1,7 @@
 package com.katsshura.cupcake.core.services.user;
 
 import com.katsshura.cupcake.core.dto.user.UserDTO;
+import com.katsshura.cupcake.core.exceptions.AlreadyExistsException;
 import com.katsshura.cupcake.core.mapper.user.UserMapper;
 import com.katsshura.cupcake.core.repositories.user.UserRepository;
 import lombok.extern.slf4j.Slf4j;
@@ -27,7 +28,11 @@ public class UserService {
                 userDTO.getCpf())
         ) {
             log.error("User already registered with provided information: {}", userDTO);
-            throw new RuntimeException("User Already Exists");
+            throw new AlreadyExistsException(
+                    String.format("User with cpf: %s and email: %s",
+                            userDTO.getCpf(),
+                            userDTO.getEmail())
+            );
         }
 
         final var result = this.userRepository.save(this.userMapper.toEntity(userDTO));
