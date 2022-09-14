@@ -41,7 +41,6 @@ public class UserDTO {
     @JsonProperty("birthday_date")
     private LocalDate birthdayDate;
 
-    //TODO: Create custom password validator to verify if the integrity of the encryption
     @NotEmpty
     @JsonProperty("password")
     private String password;

@@ -6,6 +6,9 @@ import java.lang.annotation.*;
 
 import static java.lang.annotation.ElementType.*;
 
+/**
+ * Annotation specific to validate mobile payload encryption and encrypt it with the server encryption rule.
+ */
 @Target({ TYPE })
 @Retention(RetentionPolicy.RUNTIME)
 @Documented
