@@ -20,6 +20,7 @@ public class AddressDTO {
     @NotEmpty
     @Size(min = 8, max = 8)
     @JsonProperty("cep")
+    ///TODO: Define CEP validation
     private String cep;
 
     @NotEmpty

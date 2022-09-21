@@ -35,6 +35,7 @@ public class UserDTO {
     @NotBlank
     @Size(min = 11, max = 11)
     @JsonProperty("cpf")
+    ///TODO: Define cpf validator
     private String cpf;
 
     @NotNull
