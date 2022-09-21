@@ -37,7 +37,6 @@ public class UserDTO {
     @JsonProperty("cpf")
     private String cpf;
 
-    //TODO: Create custom date validator to verify if date is later than 1900 and less than current day
     @NotNull
     @JsonProperty("birthday_date")
     @DateValidator(between = {"1870-01-01"})
