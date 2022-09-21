@@ -3,6 +3,7 @@ package com.katsshura.cupcake.core.dto.user;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.katsshura.cupcake.core.dto.address.AddressDTO;
+import com.katsshura.cupcake.core.validation.date.DateValidator;
 import com.katsshura.cupcake.core.validation.encrypted.Encrypted;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -39,6 +40,7 @@ public class UserDTO {
     //TODO: Create custom date validator to verify if date is later than 1900 and less than current day
     @NotNull
     @JsonProperty("birthday_date")
+    @DateValidator(between = {"1870-01-01"})
     private LocalDate birthdayDate;
 
     @NotEmpty
