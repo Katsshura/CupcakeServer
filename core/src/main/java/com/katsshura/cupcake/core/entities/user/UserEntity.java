@@ -11,6 +11,7 @@ import lombok.NoArgsConstructor;
 import javax.persistence.*;
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Objects;
 
 @Entity
 @Data
@@ -42,4 +43,23 @@ public class UserEntity extends BaseEntity {
             inverseJoinColumns = @JoinColumn(name = "address_id")
     )
     private List<AddressEntity> registeredAddresses;
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        if (Objects.equals(getId(), ((UserEntity) o).getId())) return true;
+        UserEntity that = (UserEntity) o;
+        return Objects.equals(email, that.email)
+                && Objects.equals(name, that.name)
+                && Objects.equals(cpf, that.cpf)
+                && Objects.equals(birthdayDate, that.birthdayDate)
+                && Objects.equals(password, that.password)
+                && Objects.equals(registeredAddresses, that.registeredAddresses);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(super.hashCode(), email, name, cpf, birthdayDate, password, registeredAddresses);
+    }
 }
