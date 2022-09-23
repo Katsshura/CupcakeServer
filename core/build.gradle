@@ -1,3 +1,17 @@
+plugins {
+    id "org.flywaydb.flyway" version "${flywayVersion}"
+}
+
+flyway {
+    baselineOnMigrate = true
+}
+
+task migrateLocal(type: org.flywaydb.gradle.task.FlywayMigrateTask) {
+    configFiles = [
+            'src/main/resources/flyway-dev.config'
+    ]
+}
+
 task testJar(type: Jar) {
     classifier = 'test'
     from sourceSets.test.output
@@ -30,6 +44,28 @@ dependencies {
 
     testImplementation "org.testcontainers:testcontainers:${testContainersVersion}"
     testImplementation "org.testcontainers:postgresql:${testContainersVersion}"
+    testImplementation "org.flywaydb.flyway-test-extensions:flyway-spring-test:${flywaySpringTestVersion}"
+}
+
+tasks.withType(JavaCompile) {
+    options.compilerArgs += [
+            '-Amapstruct.suppressGeneratorTimestamp=true',
+            '-Amapstruct.defaultComponentModel=spring'
+    ]
+}
+
+tasks.withType(Test) {
+    testLogging {
+        events "passed", "skipped", "failed"
+        afterSuite { desc, result ->
+            if (!desc.parent) { // will match the outermost suite
+                def output = "Results: ${result.resultType} (${result.testCount} tests, ${result.successfulTestCount} passed, ${result.failedTestCount} failed, ${result.skippedTestCount} skipped)" as Object
+                def startItem = '|  ', endItem = '  |'
+                def repeatLength = startItem.length() + output.length() + endItem.length()
+                println('\n' + ('-' * repeatLength) + '\n' + startItem + output + endItem + '\n' + ('-' * repeatLength))
+            }
+        }
+    }
 }
 
 test {
