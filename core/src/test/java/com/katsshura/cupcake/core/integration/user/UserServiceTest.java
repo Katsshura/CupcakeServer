@@ -5,10 +5,10 @@ import com.katsshura.cupcake.core.config.IntegrationTestsConfiguration;
 import com.katsshura.cupcake.core.entities.address.AddressEntity;
 import com.katsshura.cupcake.core.entities.user.UserEntity;
 import com.katsshura.cupcake.core.repositories.user.UserRepository;
-import org.hamcrest.Matchers;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -57,6 +57,21 @@ public class UserServiceTest {
 
         @Test
         void shouldThrowErrorWhenTryingSaveUserInvalidData() {
+            final var address = AddressEntity.builder()
+                    .cep(null)
+                    .propertyNumber("10")
+                    .logradouro("Rua Joaquim Nabuco")
+                    .build();
+            final var user = UserEntity.builder()
+                    .cpf(null)
+                    .birthdayDate(LocalDate.parse("1999-01-20"))
+                    .email(null)
+                    .name("Test One")
+                    .password("somepassword")
+                    .registeredAddresses(List.of(address))
+                    .build();
+
+            assertThrows(DataIntegrityViolationException.class, () -> userRepository.save(user));
 
         }
     }
