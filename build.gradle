@@ -5,6 +5,7 @@ buildscript {
 
     dependencies {
         classpath "org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}"
+        classpath 'com.adarshr:gradle-test-logger-plugin:3.2.0'
     }
 }
 
@@ -20,6 +21,7 @@ allprojects {
     apply plugin: 'eclipse'
     apply plugin: 'org.springframework.boot'
     apply plugin: 'io.spring.dependency-management'
+    apply plugin: 'com.adarshr.test-logger'
 
     group 'com.katsshura.cupcake'
 
