@@ -57,7 +57,13 @@ allprojects {
 
         implementation ("com.github.javafaker:javafaker:${fakerVersion}") { exclude module: 'org.yaml' }
         implementation 'org.yaml:snakeyaml:1.26'
-        implementation "com.fasterxml.jackson.datatype:jackson-datatype-jsr310:2.8.6"
+        implementation "com.fasterxml.jackson.datatype:jackson-datatype-jsr310:${jacksonVersion}"
+
+        //Open API
+        implementation "org.springdoc:springdoc-openapi-ui:${openApiVersion}"
+        implementation "org.springdoc:springdoc-openapi-webmvc-core:${openApiVersion}"
+        implementation "org.springdoc:springdoc-openapi-webflux-ui:${openApiVersion}"
+
 
         testImplementation "org.junit.jupiter:junit-jupiter:${junitVersion}"
         testImplementation "org.junit.jupiter:junit-jupiter-api:${junitVersion}"
