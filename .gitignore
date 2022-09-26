@@ -14,6 +14,7 @@
 *.ipr
 /out/
 out/
+.vscode
 
 ### NetBeans ###
 /nbproject/private/
