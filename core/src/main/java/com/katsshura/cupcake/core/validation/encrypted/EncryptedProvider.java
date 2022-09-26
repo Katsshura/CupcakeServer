@@ -30,7 +30,10 @@ public class EncryptedProvider implements ConstraintValidator<Encrypted, Object>
         for (String propertyName: propertiesName) {
             final var wrapper = new BeanWrapperImpl(value);
             final var propertyValue = (String) wrapper.getPropertyValue(propertyName);
+
             //TODO: Validate property value to match encryption from mobile
+            if (propertyValue == null) return false;
+
             final var encryptedValue = this.encryptService.encrypt(propertyValue);
             wrapper.setPropertyValue(propertyName, encryptedValue);
         }

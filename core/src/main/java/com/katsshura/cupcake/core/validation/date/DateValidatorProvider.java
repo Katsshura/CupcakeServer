@@ -44,6 +44,8 @@ public class DateValidatorProvider implements ConstraintValidator<DateValidator,
     private boolean validateRangeDates(final LocalDate startRange,
                                        final LocalDate endRange,
                                        final LocalDate value) {
+        if (value == null) return false;
+
         var result = value.isAfter(startRange);
         result &= value.isBefore(endRange);
         return result;
