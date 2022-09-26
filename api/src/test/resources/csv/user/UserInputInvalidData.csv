@@ -1,0 +1,18 @@
+NAME,EMAIL,CPF,BIRTHDAY,PASSWORD,CEP,LOGRADOURO,PROPERTY_NUMBER,COMPLEMENT
+,test1@test.com,05155638038,1999-01-20,somepassword,76804066,Rua Joaquim Nabuco,10,
+Test Two,,92158444061,1999-08-18,somepassword,64048190,Rua Tabelião José Basílio,1,Test one
+Test Three,test3,59029991038,1992-02-08,somepassword,65050856,Rua B,AB1,
+Test Four,test4@test.com,,2006-05-26,somepassword,65083514,Rua Valdir de Aquino,3654,Test Two
+Test Five,test5@test.com,8093903305400000001,1982-08-18,somepassword,69315659,Rua Antonio Ferreira de Souza,A31,Test Three
+Test Six,test6@test.com,549076,1995-01-01,somepassword,69099258,Rua Santa Cecília,C489,
+Test Six,test6@test.com,60936549076,1995-01-01,,69099258,Rua Santa Cecília,C489,
+Test Six,test6@test.com,60936549076,,somepassword,69099258,Rua Santa Cecília,C489,
+Test Six,test6@test.com,60936549076,1860-01-01,somepassword,69099258,Rua Santa Cecília,C489,
+Test One,test1@test.com,05155638038,1999-01-20,somepassword,,Rua Joaquim Nabuco,10,
+Test Two,test2@test.com,92158444061,1999-08-18,somepassword,45567865786764048190,Rua Tabelião José Basílio,1,Test one
+Test Three,test3@test.com,59029991038,1992-02-08,somepassword,6,Rua B,AB1,
+Test Four,test4@test.com,85387931010,2006-05-26,somepassword,65083514,,3654,Test Two
+Test Five,test5@test.com,80939033054,1982-08-18,somepassword,69315659,R,A31,Test Three
+Test Six,test6@test.com,60936549076,1995-01-01,somepassword,69099258,Rua Santa Cecília,,
+,,,,,,,,
+,test2,,1860-01-01,,,Rua Tabelião José Basílio,1,Test one
