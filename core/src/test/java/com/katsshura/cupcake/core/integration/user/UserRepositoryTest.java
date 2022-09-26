@@ -23,7 +23,7 @@ import static org.hamcrest.Matchers.*;
 import static org.junit.jupiter.api.Assertions.*;
 
 @IntegrationTestsConfiguration
-public class UserServiceTest {
+public class UserRepositoryTest {
 
     @Autowired
     private UserRepository userRepository;
