@@ -1,6 +1,8 @@
 package com.katsshura.cupcake.api.controller.user;
 
+import com.katsshura.cupcake.api.security.service.AuthenticatorService;
 import com.katsshura.cupcake.core.dto.user.UserDTO;
+import com.katsshura.cupcake.core.dto.user.UserSignInDTO;
 import com.katsshura.cupcake.core.services.user.UserService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
@@ -18,8 +20,11 @@ public class UserController {
 
     private final UserService userService;
 
-    public UserController(final UserService userService) {
+    private final AuthenticatorService authenticatorService;
+
+    public UserController(final UserService userService, final AuthenticatorService authenticatorService) {
         this.userService = userService;
+        this.authenticatorService = authenticatorService;
     }
 
     @PostMapping
@@ -28,6 +33,12 @@ public class UserController {
 
         final var result = this.userService.persistUser(userDTO);
 
+        return ResponseEntity.ok(result);
+    }
+
+    @PostMapping("/signin")
+    public ResponseEntity<String> singIn(@RequestBody @Valid UserSignInDTO userSignInDTO) {
+        final var result = this.authenticatorService.authenticateUser(userSignInDTO);
         return ResponseEntity.ok(result);
     }
 }
