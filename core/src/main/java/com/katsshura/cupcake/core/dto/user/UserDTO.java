@@ -23,6 +23,9 @@ import java.util.List;
 @Encrypted(propertiesName = { "password" })
 public class UserDTO {
 
+    @JsonProperty("id")
+    private Long id;
+
     @NotBlank
     @Email
     @JsonProperty("email")
