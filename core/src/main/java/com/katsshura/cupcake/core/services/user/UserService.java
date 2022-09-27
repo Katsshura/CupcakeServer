@@ -8,6 +8,8 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
+
 @Service
 @Slf4j
 public class UserService {
@@ -39,5 +41,14 @@ public class UserService {
         log.debug("User saved successfully in database: {}", result);
 
         return this.userMapper.toDTO(result);
+    }
+
+    @Transactional
+    public UserDTO findByEmail(final String email) {
+        final var result = this.userRepository.findByEmail(email);
+
+        if (result.isEmpty()) return null;
+
+        return this.userMapper.toDTO(result.get());
     }
 }
