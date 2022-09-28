@@ -8,13 +8,14 @@ import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Service;
 
 import java.util.Date;
+import java.util.Map;
 
 @Service
 @Slf4j
 public class JwtTokenService {
     private final JwtProperties jwtProperties;
 
-    public JwtTokenService(JwtProperties jwtProperties) {
+    public JwtTokenService(final JwtProperties jwtProperties) {
         this.jwtProperties = jwtProperties;
     }
 
@@ -24,6 +25,7 @@ public class JwtTokenService {
 
         return Jwts.builder()
                 .setSubject((userPrincipal.getEmail()))
+                .addClaims(this.getClaims(userPrincipal))
                 .setIssuedAt(new Date())
                 .setExpiration(new Date((new Date()).getTime() + jwtProperties.getExpirationMs()))
                 .signWith(SignatureAlgorithm.HS512, jwtProperties.getSecret())
@@ -51,5 +53,12 @@ public class JwtTokenService {
         }
 
         return false;
+    }
+
+    private Map<String, Object> getClaims(final UserDetailsDTO userDetailsDTO) {
+        return Map.of(
+                "id", userDetailsDTO.getId(),
+                "name", userDetailsDTO.getName()
+        );
     }
 }

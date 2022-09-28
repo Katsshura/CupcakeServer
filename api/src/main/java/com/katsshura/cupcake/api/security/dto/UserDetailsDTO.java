@@ -27,6 +27,8 @@ public class UserDetailsDTO implements UserDetails {
 
     private final String email;
 
+    private final String name;
+
     @JsonIgnore
     private final String password;
 
@@ -38,6 +40,7 @@ public class UserDetailsDTO implements UserDetails {
                 .username(userDTO.getEmail())
                 .password(userDTO.getPassword())
                 .email(userDTO.getEmail())
+                .name(userDTO.getName())
                 .build();
     }
 
