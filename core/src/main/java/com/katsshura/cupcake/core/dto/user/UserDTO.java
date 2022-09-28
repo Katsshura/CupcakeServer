@@ -19,9 +19,12 @@ import java.util.List;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-@JsonIgnoreProperties(ignoreUnknown = true)
+@JsonIgnoreProperties(ignoreUnknown = true, value = { "password" }, allowSetters = true)
 @Encrypted(propertiesName = { "password" })
 public class UserDTO {
+
+    @JsonProperty("id")
+    private Long id;
 
     @NotBlank
     @Email

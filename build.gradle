@@ -10,13 +10,14 @@ buildscript {
 }
 
 plugins {
-    id 'java'
+    id 'java-library'
+    id 'org.springframework.boot' version '2.3.1.RELEASE'
 }
 
 version '1.0-SNAPSHOT'
 
 allprojects {
-    apply plugin: 'java'
+    apply plugin: 'java-library'
     apply plugin: 'idea'
     apply plugin: 'eclipse'
     apply plugin: 'org.springframework.boot'
@@ -52,6 +53,7 @@ allprojects {
         implementation "org.projectlombok:lombok:${lombokVersion}"
         annotationProcessor "org.projectlombok:lombok:${lombokVersion}"
         annotationProcessor "org.mapstruct:mapstruct-processor:${mapStructVersion}"
+        annotationProcessor group: 'org.springframework.boot', name: 'spring-boot-configuration-processor'
 
         compileOnly "org.springframework.boot:spring-boot-devtools"
 
@@ -64,6 +66,10 @@ allprojects {
         implementation "org.springdoc:springdoc-openapi-webmvc-core:${openApiVersion}"
         implementation "org.springdoc:springdoc-openapi-webflux-ui:${openApiVersion}"
 
+        implementation "io.jsonwebtoken:jjwt-api:${jjwtApiVersion}"
+        api "io.jsonwebtoken:jjwt-api:${jjwtApiVersion}"
+        runtimeOnly "io.jsonwebtoken:jjwt-impl:${jjwtApiVersion}"
+        runtimeOnly("io.jsonwebtoken:jjwt-orgjson:${jjwtApiVersion}")
 
         testImplementation "org.junit.jupiter:junit-jupiter:${junitVersion}"
         testImplementation "org.junit.jupiter:junit-jupiter-api:${junitVersion}"
