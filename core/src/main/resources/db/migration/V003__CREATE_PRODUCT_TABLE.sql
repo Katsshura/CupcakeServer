@@ -6,8 +6,8 @@ CREATE TABLE IF NOT EXISTS "product"
     version			INT NOT NULL,
     name			VARCHAR(255) NOT NULL,
     description		TEXT NOT NULL,
-    price			NUMERIC(12, 2) NOT NULL,
+    price			NUMERIC NOT NULL,
     image_url		TEXT NOT NULL,
     available_stock	BIGINT NOT NULL DEFAULT 0,
-    popularity		BIGINT NOT NULL DEFAULT 0
+    popularity		NUMERIC NOT NULL DEFAULT 0.0
 );
