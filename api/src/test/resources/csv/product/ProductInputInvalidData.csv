@@ -1,0 +1,9 @@
+NAME,DESCRIPTION,PRICE,IMAGE,AVAILABLE_STOCK
+,Product Test Via Postman One,0.99,localhost:0001,1
+Test Product Two,,1.99,localhost:0002,2
+Test Product Two,Produ,1.99,localhost:0002,2
+Test Product Three,Product Test Via Postman Three,,localhost:0003,3
+Test Product Three,Product Test Via Postman Three,0,localhost:0003,3
+Test Product Four,Product Test Via Postman Four,3.99,,4
+Test Product Four,Product Test Via Postman Four,3.99,localhost:0004,
+Test Product Five,Product Test Via Postman Five,4.99,localhost:0005,0
