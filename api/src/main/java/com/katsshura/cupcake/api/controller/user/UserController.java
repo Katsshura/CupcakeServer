@@ -6,6 +6,7 @@ import com.katsshura.cupcake.core.dto.user.UserSignInDTO;
 import com.katsshura.cupcake.core.dto.user.UserSignInResponse;
 import com.katsshura.cupcake.core.services.user.UserService;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -34,7 +35,7 @@ public class UserController {
 
         final var result = this.userService.persistUser(userDTO);
 
-        return ResponseEntity.ok(result);
+        return new ResponseEntity<>(result, HttpStatus.CREATED);
     }
 
     @PostMapping("/signin")
