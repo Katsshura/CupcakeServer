@@ -7,6 +7,7 @@ import com.katsshura.cupcake.api.config.ControllerTestsConfiguration;
 import com.katsshura.cupcake.api.config.aggregator.UserDtoAggregator;
 import com.katsshura.cupcake.core.dto.user.UserDTO;
 import com.katsshura.cupcake.core.services.user.UserService;
+import org.json.JSONObject;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.aggregator.AggregateWith;
@@ -42,12 +43,15 @@ public class UserControllerTest {
     @ParameterizedTest(name = "#[{index}] Should assert status code 200 for valid user!")
     @CsvFileSource(resources = "/csv/user/UserInputValidData.csv", numLinesToSkip = 1)
     void shouldCreateUser(@AggregateWith(UserDtoAggregator.class) UserDTO user) throws Exception {
+        final var content = new JSONObject(MAPPER.writeValueAsString(user));
+        content.put("password", user.getPassword());
+
         when(userService.persistUser(user)).thenReturn(user);
 
         mockMvc.perform(post(REQUEST_URL)
-                .content(MAPPER.writeValueAsString(user))
+                .content(content.toString())
                 .contentType(MediaType.APPLICATION_JSON_VALUE)
-        ).andExpect(status().isOk());
+        ).andExpect(status().isCreated());
     }
 
     @ParameterizedTest(name = "#[{index}] Should assert status code 400 for invalid user!")
