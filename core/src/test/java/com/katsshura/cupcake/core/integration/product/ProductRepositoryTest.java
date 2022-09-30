@@ -3,12 +3,20 @@ package com.katsshura.cupcake.core.integration.product;
 import com.katsshura.cupcake.core.config.IntegrationTestsConfiguration;
 import com.katsshura.cupcake.core.entities.product.ProductEntity;
 import com.katsshura.cupcake.core.repositories.product.ProductRepository;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvFileSource;
+import org.junit.jupiter.params.provider.CsvSource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
+import org.springframework.data.domain.Pageable;
+import org.springframework.test.context.jdbc.Sql;
+import org.springframework.test.context.jdbc.SqlGroup;
 
 import java.math.BigDecimal;
+import java.util.Comparator;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.*;
@@ -58,4 +66,57 @@ public class ProductRepositoryTest {
             assertThrows(DataIntegrityViolationException.class, () -> productRepository.save(product));
         }
     }
+
+    @Nested
+    @IntegrationTestsConfiguration
+    class ListProduct {
+        @ParameterizedTest(name = "#[{index}] Should assertNotNull and assertEquals for all entity properties" +
+                "with given parameters!")
+        @CsvSource(value = { "'',5", "one, 1", "two, 1", "three,1", "four,1", "five,1", "test,5" })
+        @SqlGroup({
+                @Sql(executionPhase = Sql.ExecutionPhase.BEFORE_TEST_METHOD,
+                        scripts = "classpath:scripts/product/BeforeProductRepositoryTest.sql"),
+                @Sql(executionPhase = Sql.ExecutionPhase.AFTER_TEST_METHOD,
+                        scripts = "classpath:scripts/product/AfterProductRepositoryTest.sql")
+        })
+        void shouldFindAllWithFiltersSortedByPopularity(String search, int expectedResult) {
+            final var pageable = Pageable.unpaged();
+            final var result = productRepository
+                    .findAllByNameContainingIgnoreCaseOrderByPopularityDesc(search, pageable);
+            final var maxPopularity = result.stream()
+                    .max(Comparator.comparingDouble(ProductEntity::getPopularity)).get()
+                    .getPopularity();
+
+            assertAll(
+                    () -> assertNotNull(result),
+                    () -> assertFalse(result.isEmpty()),
+                    () -> assertEquals(maxPopularity, result.getContent().get(0).getPopularity())
+            );
+        }
+
+        @Test
+        @DisplayName("Should find all products sorted by popularity value!")
+        @SqlGroup({
+                @Sql(executionPhase = Sql.ExecutionPhase.BEFORE_TEST_METHOD,
+                        scripts = "classpath:scripts/product/BeforeProductRepositoryTest.sql"),
+                @Sql(executionPhase = Sql.ExecutionPhase.AFTER_TEST_METHOD,
+                        scripts = "classpath:scripts/product/AfterProductRepositoryTest.sql")
+        })
+        void shouldFindAllSortedByPopularity() {
+            final var pageable = Pageable.unpaged();
+            final var result = productRepository
+                    .findAllByOrderByPopularityDesc(pageable);
+
+            assertAll(
+                    () -> assertNotNull(result),
+                    () -> assertFalse(result.isEmpty()),
+                    () -> assertEquals(5.0, result.getContent().get(0).getPopularity()),
+                    () -> assertEquals(4.0, result.getContent().get(1).getPopularity()),
+                    () -> assertEquals(3.0, result.getContent().get(2).getPopularity()),
+                    () -> assertEquals(2.0, result.getContent().get(3).getPopularity()),
+                    () -> assertEquals(1.0, result.getContent().get(4).getPopularity())
+            );
+        }
+    }
+
 }
