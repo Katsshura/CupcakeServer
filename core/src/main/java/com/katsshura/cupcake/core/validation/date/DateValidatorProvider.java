@@ -2,7 +2,6 @@ package com.katsshura.cupcake.core.validation.date;
 
 import com.katsshura.cupcake.core.exceptions.IncompatibleValueException;
 import org.apache.commons.lang3.StringUtils;
-import org.apache.tomcat.jni.Local;
 
 import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;

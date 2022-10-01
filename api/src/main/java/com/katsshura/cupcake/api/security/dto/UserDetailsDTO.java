@@ -2,7 +2,6 @@ package com.katsshura.cupcake.api.security.dto;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.fasterxml.jackson.annotation.JsonProperty;
 import com.katsshura.cupcake.core.dto.user.UserDTO;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
