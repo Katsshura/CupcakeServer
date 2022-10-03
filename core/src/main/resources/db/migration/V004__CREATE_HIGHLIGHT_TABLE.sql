@@ -7,6 +7,7 @@ CREATE TABLE IF NOT EXISTS "highlights"
     title           TEXT NOT NULL,
     subtitle 		TEXT NOT NULL,
     product_id 		BIGINT NOT NULL,
+    enabled         BOOLEAN NOT NULL DEFAULT true,
     CONSTRAINT fk_highlights_product_id
         FOREIGN KEY (product_id)
             REFERENCES "product" (id)
