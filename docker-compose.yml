@@ -1,0 +1,21 @@
+version: "3.2"
+services:
+  db:
+    image: postgres:11
+    container_name: postgres-cupcake
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres-cupcake:/var/lib/postgresql/data
+    environment:
+      POSTGRES_DB: cupcake
+      POSTGRES_USER: admin
+      POSTGRES_PASSWORD: admin
+
+volumes:
+  postgres-cupcake:
+
+networks:
+  private:
+    external:
+      name: private
