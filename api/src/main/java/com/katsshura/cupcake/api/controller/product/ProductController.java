@@ -1,6 +1,8 @@
 package com.katsshura.cupcake.api.controller.product;
 
+import com.katsshura.cupcake.core.dto.highlight.HighlightDTO;
 import com.katsshura.cupcake.core.dto.product.ProductDTO;
+import com.katsshura.cupcake.core.services.highlight.HighlightService;
 import com.katsshura.cupcake.core.services.product.ProductService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
@@ -11,6 +13,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -24,9 +27,12 @@ import javax.validation.Valid;
 public class ProductController {
 
     private final ProductService productService;
+    private final HighlightService highlightService;
 
-    public ProductController(final ProductService productService) {
+    public ProductController(final ProductService productService,
+                             final HighlightService highlightService) {
         this.productService = productService;
+        this.highlightService = highlightService;
     }
 
     @PostMapping
@@ -46,5 +52,25 @@ public class ProductController {
     @GetMapping("/{id}")
     public ResponseEntity<ProductDTO> findProductById(@PathVariable final Long id) {
         return ResponseEntity.ok(this.productService.findProductById(id));
+    }
+
+    @PostMapping("/highlight/{productId}")
+    public ResponseEntity<HighlightDTO> createHighlight(@PathVariable final Long productId,
+                                                        @RequestBody @Valid final HighlightDTO highlightDTO) {
+
+        final var result = this.highlightService.createHighlight(highlightDTO, productId);
+        return new ResponseEntity<>(result, HttpStatus.CREATED);
+    }
+
+    @GetMapping("/highlight")
+    public ResponseEntity<HighlightDTO> getEnabledHighlight() {
+        final var result = this.highlightService.getHighlight();
+        return ResponseEntity.ok(result);
+    }
+
+    @PutMapping("/highlight/{id}")
+    public ResponseEntity disableHighlight(@PathVariable final Long id) {
+        this.highlightService.disableHighlight(id);
+        return ResponseEntity.ok().build();
     }
 }
