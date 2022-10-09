@@ -10,6 +10,7 @@ import org.mapstruct.ReportingPolicy;
 @Mapper(unmappedTargetPolicy = ReportingPolicy.IGNORE, componentModel = "spring")
 public interface UserPaymentCardMapper {
 
+    @Mapping(source = "id", target = "id")
     @Mapping(source = "cardNumber", target = "cardNumber")
     @Mapping(source = "expiringDate", target = "expiringDate")
     @Mapping(source = "customName", target = "customName")

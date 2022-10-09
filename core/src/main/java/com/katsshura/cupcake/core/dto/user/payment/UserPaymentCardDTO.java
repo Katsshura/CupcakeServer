@@ -19,6 +19,8 @@ import javax.validation.constraints.Size;
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class UserPaymentCardDTO {
 
+    private Long id;
+
     @NotBlank
     @Size(min = 16, max = 16)
     @JsonProperty("card_number")
