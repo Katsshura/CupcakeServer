@@ -64,7 +64,7 @@ jobs:
     - uses: actions/upload-artifact@v3
       with:
         name: Package
-        path: build/libs/api.jar
+        path: api/build/libs/api.jar
 
     - name: Configure AWS credentials
       uses: aws-actions/configure-aws-credentials@v1
