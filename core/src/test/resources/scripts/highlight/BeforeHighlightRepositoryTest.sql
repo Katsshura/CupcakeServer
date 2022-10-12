@@ -1,7 +1,7 @@
-insert into product (id, created_at, updated_at, version, name, description, price, image_url, available_stock, popularity) values (10, now(), now(), 0, 'Test One', 'Test Description One', 1.99, 'https://localhost:8080/image1', 1, 1);
-insert into product (id, created_at, updated_at, version, name, description, price, image_url, available_stock, popularity) values (20, now(), now(), 0, 'Test Two', 'Test Description Two', 2.99, 'https://localhost:8080/image2', 2, 2);
-insert into product (id, created_at, updated_at, version, name, description, price, image_url, available_stock, popularity) values (30, now(), now(), 0, 'Test Three', 'Test Description Three', 3.99, 'https://localhost:8080/image3', 3, 3);
+insert into product (id, created_at, updated_at, version, name, description, price, image_url, available_stock, popularity) values (10, now(), now(), 0, 'Test One', 'Test Description One', 1.99, 'https://localhost:8080/image1', 1, 1) ON CONFLICT DO NOTHING;
+insert into product (id, created_at, updated_at, version, name, description, price, image_url, available_stock, popularity) values (20, now(), now(), 0, 'Test Two', 'Test Description Two', 2.99, 'https://localhost:8080/image2', 2, 2) ON CONFLICT DO NOTHING;
+insert into product (id, created_at, updated_at, version, name, description, price, image_url, available_stock, popularity) values (30, now(), now(), 0, 'Test Three', 'Test Description Three', 3.99, 'https://localhost:8080/image3', 3, 3) ON CONFLICT DO NOTHING;
 
-insert into highlights (id, created_at, updated_at, version, title, subtitle, product_id, enabled) values (10, now(), now(), 0, 'Test One', 'Test Description One', 10, false);
-insert into highlights (id, created_at, updated_at, version, title, subtitle, product_id, enabled) values (20, now(), now(), 0, 'Test Two', 'Test Description Two', 20, true);
-insert into highlights (id, created_at, updated_at, version, title, subtitle, product_id, enabled) values (30, now(), now(), 0, 'Test Three', 'Test Description Three', 30, false);
+insert into highlights (id, created_at, updated_at, version, title, subtitle, product_id, enabled) values (10, now(), now(), 0, 'Test One', 'Test Description One', 10, false) ON CONFLICT DO NOTHING;
+insert into highlights (id, created_at, updated_at, version, title, subtitle, product_id, enabled) values (20, now(), now(), 0, 'Test Two', 'Test Description Two', 20, true) ON CONFLICT DO NOTHING;
+insert into highlights (id, created_at, updated_at, version, title, subtitle, product_id, enabled) values (30, now(), now(), 0, 'Test Three', 'Test Description Three', 30, false) ON CONFLICT DO NOTHING;
