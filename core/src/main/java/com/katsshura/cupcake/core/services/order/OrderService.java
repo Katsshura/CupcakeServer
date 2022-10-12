@@ -17,6 +17,8 @@ import com.katsshura.cupcake.core.repositories.product.ProductRepository;
 import com.katsshura.cupcake.core.repositories.user.UserRepository;
 import com.katsshura.cupcake.core.repositories.user.payment.UserPaymentCardRepository;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
@@ -78,6 +80,26 @@ public class OrderService {
         orderResult.getStatus().add(orderStatusResult);
 
         return this.orderMapper.toOrderResponseDto(orderResult, orderProducts);
+    }
+
+    @Transactional
+    public OrderResponseDTO getOrder(final Long id) {
+        final var orderResult = this.orderRepository.findById(id);
+
+        if (orderResult.isEmpty()) {
+            log.error("Order with id: [{}] not found!", id);
+            throw new NotFoundException(String.format("Order with id: [%s]", id));
+        }
+
+        final var order = orderResult.get();
+
+        return this.orderMapper.toOrderResponseDto(order);
+    }
+
+    @Transactional
+    public Page<OrderResponseDTO> getOrdersForUser(final Long userId, final Pageable pageable) {
+        final var orders = this.orderRepository.findAllByUserId(userId, pageable);
+        return orders.map(this.orderMapper::toOrderResponseDto);
     }
 
 
