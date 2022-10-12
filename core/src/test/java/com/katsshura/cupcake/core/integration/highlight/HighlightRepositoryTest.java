@@ -47,6 +47,7 @@ public class HighlightRepositoryTest {
                     .title("Test")
                     .subtitle("Test SubTitle")
                     .product_id(10L)
+                    .enabled(true)
                     .build();
 
             final var result = highlightRepository.save(highlightEntity);
