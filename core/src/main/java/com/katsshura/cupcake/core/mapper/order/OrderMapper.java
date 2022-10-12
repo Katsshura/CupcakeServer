@@ -12,10 +12,13 @@ import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.ReportingPolicy;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 @Mapper(unmappedTargetPolicy = ReportingPolicy.IGNORE, componentModel = "spring", uses = { ProductMapper.class })
 public interface OrderMapper {
+
+    BigDecimal DELIVERY_TAX = new BigDecimal("6.99");
 
     @Mapping(source = "product", target = "product")
     @Mapping(source = "quantity", target = "quantity")
@@ -25,6 +28,8 @@ public interface OrderMapper {
     @Mapping(source = "order.id", target = "orderId")
     @Mapping(source = "productEntity", target = "orderItems")
     @Mapping(source = "order.status", target = "orderStatus")
+    @Mapping(source = "productEntity", target = "orderTotal")
+    @Mapping(target = "deliveryTax", constant = "6.99")
     OrderResponseDTO toOrderResponseDto(OrderEntity order,
                                         List<OrderProductEntity> productEntity);
 
@@ -34,5 +39,15 @@ public interface OrderMapper {
 
     default ProductEntity toProductEntityFromOrderProduct(OrderProductEntity orderProductEntity) {
         return orderProductEntity.getProduct();
+    }
+
+    default BigDecimal mapOrderTotal(List<OrderProductEntity> productEntities) {
+        BigDecimal total = new BigDecimal(0);
+
+        for (var productEntity : productEntities) {
+            total = total.add(productEntity.getTotalPrice());
+        }
+
+        return total.add(DELIVERY_TAX);
     }
 }

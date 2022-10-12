@@ -6,6 +6,7 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 @Data
@@ -19,6 +20,12 @@ public class OrderResponseDTO {
 
     @JsonProperty("order_items")
     private List<OrderItemResponseDTO> orderItems;
+
+    @JsonProperty("order_total")
+    private BigDecimal orderTotal;
+
+    @JsonProperty("delivery_tax")
+    private BigDecimal deliveryTax;
 
     @JsonProperty("order_status")
     private List<OrderStatusDTO> orderStatus;
