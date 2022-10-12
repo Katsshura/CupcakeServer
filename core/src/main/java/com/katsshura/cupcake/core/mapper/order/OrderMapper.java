@@ -33,6 +33,13 @@ public interface OrderMapper {
     OrderResponseDTO toOrderResponseDto(OrderEntity order,
                                         List<OrderProductEntity> productEntity);
 
+    @Mapping(source = "order.id", target = "orderId")
+    @Mapping(source = "order.products", target = "orderItems")
+    @Mapping(source = "order.status", target = "orderStatus")
+    @Mapping(source = "order.products", target = "orderTotal")
+    @Mapping(target = "deliveryTax", constant = "6.99")
+    OrderResponseDTO toOrderResponseDto(OrderEntity order);
+
     @Mapping(source = "status", target = "status")
     @Mapping(source = "active", target = "active")
     OrderStatusDTO toOrderStatusEntity(OrderStatusEntity orderStatusEntity);
