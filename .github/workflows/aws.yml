@@ -74,7 +74,6 @@ jobs:
         aws-region: ${{ env.AWS_REGION }}
 
     - name: Migrate Database
-      uses: actions/checkout@v3
       run: >-
         docker run -rm
         --volume ${{ github.workspace }}/core/src/main/resources/db/migration:/flyway/sql:ro
