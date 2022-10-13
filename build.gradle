@@ -46,6 +46,9 @@ allprojects {
         implementation "com.sun.xml.bind:jaxb-core:${jaxCoreVersion}"
         implementation "com.sun.xml.bind:jaxb-impl:${jaxImpVersion}"
         implementation "org.springframework.boot:spring-boot-starter-web"
+        implementation 'org.springframework.cloud:spring-cloud-starter-aws-secrets-manager-config:2.2.6.RELEASE'
+
+
 
         implementation "org.mapstruct:mapstruct:${mapStructVersion}"
 
