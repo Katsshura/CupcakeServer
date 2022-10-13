@@ -75,7 +75,7 @@ jobs:
 
     - name: Migrate Database
       run: >-
-        docker run -rm
+        docker run --rm
         --volume ${{ github.workspace }}/core/src/main/resources/db/migration:/flyway/sql:ro
         flyway/flyway:6.2.2
         -url="${{ secrets.DB_HOST }}"
