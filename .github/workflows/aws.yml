@@ -73,6 +73,17 @@ jobs:
         aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
         aws-region: ${{ env.AWS_REGION }}
 
+    - name: Migrate Database
+      uses: actions/checkout@v3
+      run: >-
+        docker run -rm
+        --volume ${{ github.workspace }}/core/src/main/resources/db/migration:/flyway/sql:ro
+        flyway/flyway:6.2.2
+        -url="${{ secrets.DB_HOST }}"
+        -user="${{ secrets.DB_USER }}"
+        -password="${{ secrets.DB_PASS }}"
+        migrate
+
     - name: Login to Amazon ECR
       id: login-ecr
       uses: aws-actions/amazon-ecr-login@v1
