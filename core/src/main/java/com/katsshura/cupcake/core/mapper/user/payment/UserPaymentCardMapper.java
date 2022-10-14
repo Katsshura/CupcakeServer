@@ -15,6 +15,7 @@ public interface UserPaymentCardMapper {
     @Mapping(source = "expiringDate", target = "expiringDate")
     @Mapping(source = "customName", target = "customName")
     @Mapping(source = "cvv", target = "cvv")
+    @Mapping(source = "cardFlag", target = "cardFlag")
     UserPaymentCardDTO toDTO(UserPaymentCardEntity source);
 
     @InheritInverseConfiguration(name = "toDTO")
