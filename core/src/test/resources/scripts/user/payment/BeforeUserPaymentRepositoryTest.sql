@@ -7,20 +7,20 @@ insert into "user" (id, created_at, updated_at, version, email, name, cpf, birth
 insert into "user" (id, created_at, updated_at, version, email, name, cpf, birthday_date, password) values (50, now(), now(), 0, 'test5@test.com', 'Test Five', '80939033054', '1982-08-18', 'somepassword') ON CONFLICT DO NOTHING;
 insert into "user" (id, created_at, updated_at, version, email, name, cpf, birthday_date, password) values (60, now(), now(), 0, 'test6@test.com', 'Test Six', '60936549076', '1995-01-01', 'somepassword') ON CONFLICT DO NOTHING;
 
-insert into user_payment_card (id, created_at, updated_at, version, card_number, expiring_date, cvv, custom_name, user_id) values (8, now(), now(), 0, '5336139285539458', '01/24', 421, 'Test One', 10) ON CONFLICT DO NOTHING;
-insert into user_payment_card (id, created_at, updated_at, version, card_number, expiring_date, cvv, custom_name, user_id) values (9, now(), now(), 0, '5336139285539459', '02/24', 422, 'Test Two', 10) ON CONFLICT DO NOTHING;
-insert into user_payment_card (id, created_at, updated_at, version, card_number, expiring_date, cvv, custom_name, user_id) values (10, now(), now(), 0, '5336139285539460', '03/24', 423, 'Test Three', 10) ON CONFLICT DO NOTHING;
-insert into user_payment_card (id, created_at, updated_at, version, card_number, expiring_date, cvv, custom_name, user_id) values (11, now(), now(), 0, '5336139285539461', '04/24', 424, 'Test Four', 10) ON CONFLICT DO NOTHING;
+insert into user_payment_card (id, created_at, updated_at, version, card_number, expiring_date, cvv, custom_name, user_id, card_flag) values (8, now(), now(), 0, '5336139285539458', '01/24', 421, 'Test One', 10, 'MASTERCARD') ON CONFLICT DO NOTHING;
+insert into user_payment_card (id, created_at, updated_at, version, card_number, expiring_date, cvv, custom_name, user_id, card_flag) values (9, now(), now(), 0, '5336139285539459', '02/24', 422, 'Test Two', 10, 'ELO') ON CONFLICT DO NOTHING;
+insert into user_payment_card (id, created_at, updated_at, version, card_number, expiring_date, cvv, custom_name, user_id, card_flag) values (10, now(), now(), 0, '5336139285539460', '03/24', 423, 'Test Three', 10, 'MASTERCARD') ON CONFLICT DO NOTHING;
+insert into user_payment_card (id, created_at, updated_at, version, card_number, expiring_date, cvv, custom_name, user_id, card_flag) values (11, now(), now(), 0, '5336139285539461', '04/24', 424, 'Test Four', 10, 'VISA') ON CONFLICT DO NOTHING;
 
-insert into user_payment_card (id, created_at, updated_at, version, card_number, expiring_date, cvv, custom_name, user_id) values (12, now(), now(), 0, '5336139285539462', '05/24', 425, 'Test Five', 20) ON CONFLICT DO NOTHING;
-insert into user_payment_card (id, created_at, updated_at, version, card_number, expiring_date, cvv, custom_name, user_id) values (13, now(), now(), 0, '5336139285539463', '06/24', 426, 'Test Six', 20) ON CONFLICT DO NOTHING;
+insert into user_payment_card (id, created_at, updated_at, version, card_number, expiring_date, cvv, custom_name, user_id, card_flag) values (12, now(), now(), 0, '5336139285539462', '05/24', 425, 'Test Five', 20, 'VISA') ON CONFLICT DO NOTHING;
+insert into user_payment_card (id, created_at, updated_at, version, card_number, expiring_date, cvv, custom_name, user_id, card_flag) values (13, now(), now(), 0, '5336139285539463', '06/24', 426, 'Test Six', 20, 'ELO') ON CONFLICT DO NOTHING;
 
-insert into user_payment_card (id, created_at, updated_at, version, card_number, expiring_date, cvv, custom_name, user_id) values (14, now(), now(), 0, '5336139285539464', '07/24', 427, 'Test Seven', 30) ON CONFLICT DO NOTHING;
-insert into user_payment_card (id, created_at, updated_at, version, card_number, expiring_date, cvv, custom_name, user_id) values (15, now(), now(), 0, '5336139285539465', '08/24', 428, 'Test Eight', 30) ON CONFLICT DO NOTHING;
-insert into user_payment_card (id, created_at, updated_at, version, card_number, expiring_date, cvv, custom_name, user_id) values (16, now(), now(), 0, '5336139285539466', '09/24', 429, 'Test Nine', 30) ON CONFLICT DO NOTHING;
-insert into user_payment_card (id, created_at, updated_at, version, card_number, expiring_date, cvv, custom_name, user_id) values (17, now(), now(), 0, '5336139285539467', '10/24', 430, 'Test Ten', 30) ON CONFLICT DO NOTHING;
-insert into user_payment_card (id, created_at, updated_at, version, card_number, expiring_date, cvv, custom_name, user_id) values (18, now(), now(), 0, '5336139285539468', '11/24', 431, 'Test Eleven', 30) ON CONFLICT DO NOTHING;
+insert into user_payment_card (id, created_at, updated_at, version, card_number, expiring_date, cvv, custom_name, user_id, card_flag) values (14, now(), now(), 0, '5336139285539464', '07/24', 427, 'Test Seven', 30, 'MASTERCARD') ON CONFLICT DO NOTHING;
+insert into user_payment_card (id, created_at, updated_at, version, card_number, expiring_date, cvv, custom_name, user_id, card_flag) values (15, now(), now(), 0, '5336139285539465', '08/24', 428, 'Test Eight', 30, 'VISA') ON CONFLICT DO NOTHING;
+insert into user_payment_card (id, created_at, updated_at, version, card_number, expiring_date, cvv, custom_name, user_id, card_flag) values (16, now(), now(), 0, '5336139285539466', '09/24', 429, 'Test Nine', 30, 'ELO') ON CONFLICT DO NOTHING;
+insert into user_payment_card (id, created_at, updated_at, version, card_number, expiring_date, cvv, custom_name, user_id, card_flag) values (17, now(), now(), 0, '5336139285539467', '10/24', 430, 'Test Ten', 30, 'MASTERCARD') ON CONFLICT DO NOTHING;
+insert into user_payment_card (id, created_at, updated_at, version, card_number, expiring_date, cvv, custom_name, user_id, card_flag) values (18, now(), now(), 0, '5336139285539468', '11/24', 431, 'Test Eleven', 30, 'HIPERCARD') ON CONFLICT DO NOTHING;
 
-insert into user_payment_card (id, created_at, updated_at, version, card_number, expiring_date, cvv, custom_name, user_id) values (19, now(), now(), 0, '5336139285539469', '12/24', 432, 'Test Twelve', 40) ON CONFLICT DO NOTHING;
-insert into user_payment_card (id, created_at, updated_at, version, card_number, expiring_date, cvv, custom_name, user_id) values (20, now(), now(), 0, '5336139285539470', '01/25', 433, 'Test Thirteen', 40) ON CONFLICT DO NOTHING;
+insert into user_payment_card (id, created_at, updated_at, version, card_number, expiring_date, cvv, custom_name, user_id, card_flag) values (19, now(), now(), 0, '5336139285539469', '12/24', 432, 'Test Twelve', 40, 'MASTERCARD') ON CONFLICT DO NOTHING;
+insert into user_payment_card (id, created_at, updated_at, version, card_number, expiring_date, cvv, custom_name, user_id, card_flag) values (20, now(), now(), 0, '5336139285539470', '01/25', 433, 'Test Thirteen', 40, 'VISA') ON CONFLICT DO NOTHING;
 

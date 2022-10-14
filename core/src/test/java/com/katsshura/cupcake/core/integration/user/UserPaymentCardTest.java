@@ -3,6 +3,7 @@ package com.katsshura.cupcake.core.integration.user;
 import com.katsshura.cupcake.core.config.IntegrationTestsConfiguration;
 import com.katsshura.cupcake.core.entities.user.UserEntity;
 import com.katsshura.cupcake.core.entities.user.payment.UserPaymentCardEntity;
+import com.katsshura.cupcake.core.enums.card.CardFlag;
 import com.katsshura.cupcake.core.repositories.user.payment.UserPaymentCardRepository;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
@@ -51,6 +52,7 @@ public class UserPaymentCardTest {
                     .customName("Test Card")
                     .cvv(424)
                     .expiringDate("01/24")
+                    .cardFlag(CardFlag.MASTERCARD)
                     .user(user)
                     .build();
 

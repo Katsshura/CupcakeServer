@@ -2,6 +2,7 @@ package com.katsshura.cupcake.core.dto.user.payment;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.katsshura.cupcake.core.enums.card.CardFlag;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -39,5 +40,9 @@ public class UserPaymentCardDTO {
     @NotNull
     @JsonProperty("custom_name")
     private String customName;
+
+    @NotNull
+    @JsonProperty("card_flag")
+    private CardFlag cardFlag;
 
 }
