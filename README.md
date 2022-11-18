@@ -107,13 +107,28 @@ This way the credentials are managed by AWS services and injected in the contain
 
 ## Tests
 
-This project has implemented unit testing with Junit5 and database integration tests using testcontainers. To know more about testing application using Spring + JUnit 5 please read [the article](https://xr-emerson.medium.com/testing-software-with-junit-5-spring-and-pitest-12a1ceb27c7e) I've written regarding this subject and also refer to the [base project](https://github.com/Katsshura/JUnitTestingDemo) of the article.
+This project has implemented unit testing with Junit 5 and database integration tests using testcontainers. To know more about testing application using Spring + JUnit 5 please read [the article](https://xr-emerson.medium.com/testing-software-with-junit-5-spring-and-pitest-12a1ceb27c7e) I've written regarding this subject and also refer to the [base project](https://github.com/Katsshura/JUnitTestingDemo) of the article.
 
 ---
 
 <div id='deployment'/></div> 
 
 ## Deployment: AWS & Github Actions
+
+
+This project uses Github Actions to deploy the application on AWS and also to validate pull requests before merging into `master` branch. 
+
+#### Pull Request Actions
+
+When a pull request is opened with target `master` branch it triggers the github actions defined in `gradle.yml` file. When this file is executed by Github it runs the command `./gradlew test --tests` that executes all the defined tests. If all test cases are successful it automaticaly approves the PR.
+
+#### Deploy on AWS
+
+Github detects when the `master` branch is updated, when this happens it executes the actions defined in `aws.yml` file. This files defines a sequence of steps necessary to succesfully deploy the application into a container and be ready to receive requests. The image bellow explain beter how this flow works. 
+
+Also, during the deploy to AWS this files also defines instructions to execute `flyway migrations`. These migrations are responsible to keep the database up to date with the defined sql scripts.
+
+![Imgur](https://i.imgur.com/A8egGta.png)
 
 ---
 
